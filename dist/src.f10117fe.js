@@ -149,6 +149,18 @@ function () {
     this.events[eventName] = handlers;
   };
 
+  User.prototype.trigger = function (eventName) {
+    var handlers = this.events[eventName];
+
+    if (!handlers || !handlers.length) {
+      return;
+    }
+
+    handlers.forEach(function (callback) {
+      return callback();
+    });
+  };
+
   return User;
 }();
 
@@ -163,7 +175,13 @@ Object.defineProperty(exports, "__esModule", {
 var User_1 = require("./models/User");
 
 var user = new User_1.User({});
-user.on('change', function () {});
+user.on('change', function () {
+  console.log("First event");
+});
+user.on('change', function () {
+  console.log("Second event");
+});
+user.trigger('change');
 },{"./models/User":"src/models/User.ts"}],"C:/Users/Rayyan/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
