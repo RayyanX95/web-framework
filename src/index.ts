@@ -1,12 +1,5 @@
-import axios from 'axios';
+import { User } from './models/User';
 
-// axios.post('http://localhost:3000/users', {
-//   name: "Rayyan",
-//   age: 26
-// });
+const user = new User({ name: 'new record', age: 0 });
 
-axios.get('http://localhost:3000/users/1')
-  .then(res => {
-    console.log("Hi: ", res.data)
-  })
-
+user.save();

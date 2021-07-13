@@ -1,3 +1,4 @@
+import axios, { AxiosResponse } from 'axios';
 interface UserProps {
   id?: number;
   name?: string;
@@ -12,9 +13,6 @@ export class User {
 
   constructor(private data: UserProps) { };
 
-
-
-
   get(propName: string): string | number {
     return this.data[propName];
   }
@@ -26,7 +24,6 @@ export class User {
   on(eventName: string, callback: Callback): void {
     const handlers = this.events[eventName] || [];
     handlers.push(callback);
-
     this.events[eventName] = handlers;
   }
 
@@ -36,7 +33,22 @@ export class User {
     if (!handlers || !handlers.length) {
       return;
     }
-
     handlers.forEach(callback => callback())
+  }
+
+  fetch(): void {
+    axios.get(`http://localhost:3000/users/${this.get('id')}`)
+      .then((res: AxiosResponse): void => {
+        this.set(res.data);
+      });
+  };
+
+  save(): void {
+    const id = this.get('id');
+    if (id) {
+      axios.put(`http://localhost:3000/users/${id}`, this.data);
+    } else {
+      axios.post(`http://localhost:3000/users`, this.data);
+    }
   }
 }
