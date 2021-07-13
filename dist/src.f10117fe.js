@@ -1930,10 +1930,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var axios_1 = __importDefault(require("axios"));
+var axios_1 = __importDefault(require("axios")); // axios.post('http://localhost:3000/users', {
+//   name: "Rayyan",
+//   age: 26
+// });
 
-axios_1.default.get('http://localhost:3000/users/1');
-console.log("Hi");
+
+axios_1.default.get('http://localhost:3000/users/1').then(function (res) {
+  console.log("Hi: ", res.data);
+});
 },{"axios":"node_modules/axios/index.js"}],"C:/Users/Rayyan/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -1962,7 +1967,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "1770" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4396" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
